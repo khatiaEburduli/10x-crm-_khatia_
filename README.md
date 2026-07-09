@@ -1,41 +1,70 @@
-10x-crm-khatia
-Project Overview
-10x CRM is a Customer Relationship Management web application designed to help manage customer information, track interactions, and organize business data efficiently.
+# 10X CRM
 
-This project is developed as part of a frontend development practice project using modern web development technologies.
+## Project Overview
+10X CRM is a Customer Relationship Management (CRM) web application built with HTML, CSS, and JavaScript.
 
-Technologies
-HTML5
-CSS3
-JavaScript
-Git & GitHub
-Features
-The application will include:
+The application allows users to:
+- Register a new account
+- Log in to the system
+- Manage customer information
+- View a dashboard
+- Edit their profile
 
-Customer list management
-Add and edit customer information
-Search and filter customers
-User-friendly dashboard interface
-Responsive design
-Interactive elements using JavaScript
-Project Structure
-10x-crm │ ├── index.html ├── style.css ├── script.js ├── README.md ├── ai-log.md
+---
 
-Development Process
-The project is developed step by step:
+## Technologies Used
 
-Creating the initial structure
-Building the user interface
-Adding CRM functionality with JavaScript
-Improving usability and responsiveness
-AI Usage
-AI assistance was used during the development process for:
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+- LocalStorage
+- Git & GitHub
 
-Understanding project requirements
-Planning the project structure
-Getting guidance on Git and GitHub workflow
-Improving documentation
-More details can be found in ai-log.md
+---
 
-Author
-Khatia Eburduli
+## Project Structure
+
+```
+10X-CRM/
+│
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── auth.js
+│   │   ├── dashboard.js
+│   │   ├── clients.js
+│   │   ├── profile.js
+│   │   ├── storage.js
+│   │   └── helpers.js
+│   └── images/
+│
+├── index.html
+├── signup.html
+├── dashboard.html
+├── clients.html
+├── profile.html
+│
+├── README.md
+├── ai-log.md
+├── glossary.md
+└── research-note.md
+```
+
+---
+
+## Features
+
+- User Registration
+- User Login
+- Form Validation
+- Dashboard
+- Client Management
+- Profile Page
+- LocalStorage Data Persistence
+
+---
+
+## Author
+
+**Khatia Burduli**
