@@ -6,6 +6,7 @@
     <title>10X CRM - Sign Up</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <body>
 
@@ -19,19 +20,24 @@
                 type="text"
                 id="fullName"
                 placeholder="Full Name"
+  
             >
+            <small id="fullNameError" class="error-message"></small>
 
             <input
                 type="email"
                 id="email"
                 placeholder="Email"
             >
+            <small id="companyError" class="error-message"></small>
+
 
             <input
                 type="text"
                 id="company"
                 placeholder="Company (optional)"
             >
+            <small id="companyError" class="error-message"></small>
 
             <input
                 type="password"
@@ -39,11 +45,14 @@
                 placeholder="Password"
             >
 
+        <small id="passwordError" class="error-message"></small>
+
             <input
                 type="password"
                 id="confirmPassword"
                 placeholder="Confirm Password"
             >
+            <small id="confirmPasswordError" class="error-message"></small>
 
             <button type="submit">
                 Create Account
@@ -58,6 +67,7 @@
 
     </div>
 
+    <script src="assets/js/helpers.js"></script>
     <script src="assets/js/auth.js"></script>
 
 </body>

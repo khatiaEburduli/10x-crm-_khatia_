@@ -81,3 +81,18 @@ body {
 .card a:hover {
     text-decoration: underline;
 }
+
+.error-message {
+    display: block;
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    min-height: 18px;
+}
+
+ 
+.card input.input-error,
+.card input.input-error:focus {
+    border: 2px solid #dc3545;
+}

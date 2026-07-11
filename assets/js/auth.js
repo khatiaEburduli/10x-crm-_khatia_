@@ -9,8 +9,11 @@ signupForm.addEventListener("submit", function(event) {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
+
+    clearFieldError("fullName");
+
      if (fullName.length < 3) { //მინიმუმ 3 ასოს უნდა შეიცაავდეს სახელი
-        alert("Full Name must contain at least 3 characters.");
+        showFieldError("fullName", "Full Name must contain at least 3 characters.");
         return;
     }
 
@@ -24,6 +27,16 @@ if (!email.includes("@")) { // ეს ამოწმებს სწორ ფ�
     return;
 }
 
+if (password.length <8) {
+    alert("Password must be at least 8 characters");
+    return;
+}
+if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+}
+
+alert("Registration Successful!");
 
 
      console.log(fullName);
