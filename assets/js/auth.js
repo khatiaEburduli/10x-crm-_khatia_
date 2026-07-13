@@ -1,71 +1,122 @@
 const signupForm = document.getElementById("signupForm");
 
-signupForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+if (signupForm) {
 
-    const fullName = document.getElementById("fullName").value.trim();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const company = document.getElementById("company").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    signupForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    // Clear previous errors
-    clearFieldError("fullName");
-    clearFieldError("email");
-    clearFieldError("password");
-    clearFieldError("confirmPassword");
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const company = document.getElementById("company").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // Full Name Validation
-    if (fullName.length < 3) {
-        showFieldError("fullName", "Full Name must contain at least 3 characters.");
-        return;
-    }
+        // Clear previous errors
+        clearFieldError("fullName");
+        clearFieldError("email");
+        clearFieldError("password");
+        clearFieldError("confirmPassword");
 
-    // Email Validation
-    if (email === "") {
-        showFieldError("email", "Email is required.");
-        return;
-    }
+        // Full Name Validation
+        if (fullName.length < 3) {
+            showFieldError("fullName", "Full Name must contain at least 3 characters.");
+            return;
+        }
 
-    if (!email.includes("@")) {
-        showFieldError("email", "Please enter a valid email.");
-        return;
-    }
+        // Email Validation
+        if (email === "") {
+            showFieldError("email", "Email is required.");
+            return;
+        }
 
-    // Password Validation
-    if (password.length < 8) {
-        showFieldError("password", "Password must be at least 8 characters.");
-        return;
-    }
+        if (!email.includes("@")) {
+            showFieldError("email", "Please enter a valid email.");
+            return;
+        }
 
-    // Confirm Password Validation
-    if (password !== confirmPassword) {
-        showFieldError("confirmPassword", "Passwords do not match.");
-        return;
-    }
+        // Password Validation
+        if (password.length < 8) {
+            showFieldError("password", "Password must be at least 8 characters.");
+            return;
+        }
 
-    const user = {
-    id: Date.now(),
-    fullName: fullName,
-    email: email,
-    company: company,
-    password: password,
-    createdAt: new Date().toISOString()
-};
-const users = JSON.parse(localStorage.getItem("crm_users")) || [];
-users.push(user);
-localStorage.setItem("crm_users", JSON.stringify(users));
+        // Confirm Password Validation
+        if (password !== confirmPassword) {
+            showFieldError("confirmPassword", "Passwords do not match.");
+            return;
+        }
 
+        const user = {
+            id: Date.now(),
+            fullName: fullName,
+            email: email,
+            company: company,
+            password: password,
+            createdAt: new Date().toISOString()
+        };
 
-    showToast("Registration Successful!");
+        const users = JSON.parse(localStorage.getItem("crm_users")) || [];
 
-    setTimeout(function () {
-    window.location.href = "index.html";
+        users.push(user);
+
+        localStorage.setItem("crm_users", JSON.stringify(users));
+
+        showToast("Registration Successful!");
+
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 2000);
+
+        console.log(fullName);
+        console.log(email);
+        console.log(company);
+        console.log(password);
+        console.log(confirmPassword);
+    });
+
+}
+
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
+
+        clearFieldError("loginEmail");
+        clearFieldError("loginPassword");
+
+        const users = JSON.parse(localStorage.getItem("crm_users")) || [];
+
+        const user = users.find(function (item) {
+            return item.email === email;
+        });
+
+        // მომხმარებელი ვერ მოიძებნა
+        if (!user) {
+            showFieldError("loginEmail", "Invalid email or password.");
+            return;
+        }
+
+        // პაროლი არ ემთხვევა
+        if (user.password !== password) {
+            showFieldError("loginPassword", "Invalid email or password.");
+            return;
+        }
+
+        localStorage.setItem("crm_session", JSON.stringify(user));
+
+showToast("Login successful!");
+
+setTimeout(function () {
+    window.location.href = "dashboard.html";
 }, 2000);
 
-    console.log(fullName);
-    console.log(email);
-    console.log(company);
-    console.log(password);
-    console.log(confirmPassword);
-});
+        console.log("Login Successful!");
+
+    });
+
+}
