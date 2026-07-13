@@ -14,3 +14,16 @@ function clearFieldError(inputId) {
     input.classList.remove("input-error");
     error.textContent = "";
 }
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.style.visibility = "visible";
+    toast.style.opacity = "1";
+
+    setTimeout(function () {
+        toast.style.opacity = "0";
+        toast.style.visibility = "hidden";
+    }, 3000);
+}

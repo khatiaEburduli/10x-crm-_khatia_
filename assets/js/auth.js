@@ -44,7 +44,24 @@ signupForm.addEventListener("submit", function (event) {
         return;
     }
 
-    alert("Registration Successful!");
+    const user = {
+    id: Date.now(),
+    fullName: fullName,
+    email: email,
+    company: company,
+    password: password,
+    createdAt: new Date().toISOString()
+};
+const users = JSON.parse(localStorage.getItem("crm_users")) || [];
+users.push(user);
+localStorage.setItem("crm_users", JSON.stringify(users));
+
+
+    showToast("Registration Successful!");
+
+    setTimeout(function () {
+    window.location.href = "index.html";
+}, 2000);
 
     console.log(fullName);
     console.log(email);
