@@ -27,3 +27,20 @@ function showToast(message) {
         toast.style.visibility = "hidden";
     }, 3000);
 }
+
+
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    console.log(toast);
+
+    toast.textContent = message;
+    toast.style.visibility = "visible";
+    toast.style.opacity = "1";
+
+    setTimeout(function () {
+        toast.style.opacity = "0";
+        toast.style.visibility = "hidden";
+    }, 3000);
+}
