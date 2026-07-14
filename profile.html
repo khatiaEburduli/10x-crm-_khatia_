@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10X CRM - Profile</title>
+
+    <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+<body>
+
+<header class="header">
+
+    <h2>10X CRM</h2>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="profile.html">Profile</a>
+        <button id="logoutBtn">Logout</button>
+    </nav>
+
+</header>
+
+<main class="profile-page">
+
+    <div class="profile-card">
+
+        <div class="avatar" id="avatar">
+            KB
+        </div>
+
+        <h2 id="profileName">Full Name</h2>
+
+        <p id="profileEmail">email@example.com</p>
+
+        <p id="profileCompany">Company</p>
+
+        <p id="memberSince">
+            Member since:
+            <span id="memberDate"></span>
+        </p>
+
+    </div>
+
+    <div class="profile-form">
+
+        <h2>Edit Profile</h2>
+
+        <form id="profileForm">
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Full Name"
+            >
+
+            <small id="fullNameError" class="error-message"></small>
+
+            <input
+                type="text"
+                id="company"
+                placeholder="Company"
+            >
+
+            <small id="companyError" class="error-message"></small>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+<div id="toast"></div>
+
+<script src="assets/js/helpers.js"></script>
+<script src="assets/js/profile.js"></script>
+
+</body>
+</html>
