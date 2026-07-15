@@ -65,6 +65,10 @@ The application allows users to:
 
 ---
 
+## Live Demo
+
+https://10x-crm-khatia.vercel.app/
+
 ## Author
 
 **Khatia Burduli**
