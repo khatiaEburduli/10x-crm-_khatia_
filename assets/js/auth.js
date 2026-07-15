@@ -1,3 +1,15 @@
+const currentUser = JSON.parse(localStorage.getItem("crm_session"));
+
+if (
+    currentUser &&
+    (
+        window.location.pathname.includes("index.html") ||
+        window.location.pathname.includes("signup.html")
+    )
+) {
+    window.location.href = "dashboard.html";
+}
+
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -56,6 +68,18 @@ if (signupForm) {
         };
 
         const users = JSON.parse(localStorage.getItem("crm_users")) || [];
+
+        const existingUser = users.find(function (item) {
+    return item.email === email;
+});
+
+if (existingUser) {
+    showFieldError(
+        "email",
+        "An account with this email already exists."
+    );
+    return;
+}
 
         users.push(user);
 

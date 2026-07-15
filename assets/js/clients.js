@@ -1,3 +1,18 @@
+const currentUser = JSON.parse(localStorage.getItem("crm_session"));
+
+if (!currentUser) {
+    window.location.href = "index.html";
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", function () {
+
+    localStorage.removeItem("crm_session");
+
+    window.location.href = "index.html";
+
+});
 const openBtn = document.getElementById("openClientModal");
 const closeBtn = document.getElementById("closeModal");
 const modal = document.getElementById("clientModal");
@@ -135,11 +150,19 @@ document.addEventListener("click", function (event) {
 
     if (event.target.classList.contains("delete-btn")) {
 
-        const clientId = Number(event.target.dataset.id);
+    const clientId = Number(event.target.dataset.id);
 
-        deleteClient(clientId);
+    const isConfirmed = confirm(
+        "Are you sure you want to delete this client?"
+    );
 
+    if (!isConfirmed) {
+        return;
     }
+
+    deleteClient(clientId);
+
+}
 
     if (event.target.classList.contains("edit-btn")) {
 
