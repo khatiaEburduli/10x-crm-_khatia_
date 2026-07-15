@@ -73,6 +73,58 @@
 
     </div>
 
+    <div class="password-form">
+
+    <h2>Change Password</h2>
+
+    <form id="passwordForm">
+
+        <input
+            type="password"
+            id="currentPassword"
+            placeholder="Current Password"
+        >
+
+        <small id="currentPasswordError" class="error-message"></small>
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="New Password"
+        >
+
+        <small id="newPasswordError" class="error-message"></small>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+        >
+
+        <small id="confirmPasswordError" class="error-message"></small>
+
+        <button type="submit">
+            Change Password
+        </button>
+
+    </form>
+
+</div>
+
+<div class="danger-zone">
+
+    <h2>Danger Zone</h2>
+
+    <p>
+        Reset all CRM client data.
+    </p>
+
+    <button id="resetDataBtn">
+        Reset CRM Data
+    </button>
+
+</div>
+
 </main>
 
 <div id="toast"></div>
