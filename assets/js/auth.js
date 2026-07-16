@@ -22,6 +22,7 @@ if (signupForm) {
         const company = document.getElementById("company").value.trim();
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Clear previous errors
         clearFieldError("fullName");
@@ -29,33 +30,45 @@ if (signupForm) {
         clearFieldError("password");
         clearFieldError("confirmPassword");
 
+        let hasError = false;
+
         // Full Name Validation
         if (fullName.length < 3) {
-            showFieldError("fullName", "Full Name must contain at least 3 characters.");
-            return;
+            showFieldError("fullName", "Full name must be at least 3 characters");
+            hasError = true;
         }
 
         // Email Validation
         if (email === "") {
             showFieldError("email", "Email is required.");
-            return;
+            hasError = true;
         }
 
-        if (!email.includes("@")) {
-            showFieldError("email", "Please enter a valid email.");
-            return;
-        }
+        if (!emailPattern.test(email)) {
+    showFieldError(
+        "email",
+        "Please enter a valid email address."
+    );
+    hasError = true;
+}
 
         // Password Validation
         if (password.length < 8) {
             showFieldError("password", "Password must be at least 8 characters.");
-            return;
+            hasError = true;
         }
+        if (!/^(?=.*[A-Za-z])(?=.*\d).+$/.test(password)) {
+    showFieldError(
+        "password",
+        "Password must be at least 8 characters and contain a letter and a number."
+    );
+    hasError = true;
+}
 
         // Confirm Password Validation
         if (password !== confirmPassword) {
             showFieldError("confirmPassword", "Passwords do not match.");
-            return;
+            hasError = true;
         }
 
         const user = {
@@ -78,6 +91,10 @@ if (existingUser) {
         "email",
         "An account with this email already exists."
     );
+    hasError = true;
+}
+
+if (hasError) {
     return;
 }
 
