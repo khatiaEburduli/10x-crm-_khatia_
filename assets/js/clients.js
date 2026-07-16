@@ -1,4 +1,4 @@
-const currentUser = JSON.parse(localStorage.getItem("crm_session"));
+/*const currentUser = JSON.parse(localStorage.getItem("crm_session"));
 
 if (!currentUser) {
     window.location.href = "index.html";
@@ -12,7 +12,7 @@ logoutBtn.addEventListener("click", function () {
 
     window.location.href = "index.html";
 
-});
+}); */
 const openBtn = document.getElementById("openClientModal");
 const closeBtn = document.getElementById("closeModal");
 const modal = document.getElementById("clientModal");

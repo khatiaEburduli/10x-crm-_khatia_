@@ -49,6 +49,7 @@ if (signupForm) {
         "email",
         "Please enter a valid email address."
     );
+
     hasError = true;
 }
 
@@ -131,23 +132,31 @@ if (loginForm) {
         clearFieldError("loginPassword");
 
         const users = JSON.parse(localStorage.getItem("crm_users")) || [];
+        let hasError = false;
+
+if (email === "") {
+    showFieldError("loginEmail", "Email is required");
+    hasError = true;
+}
+
+if (password === "") {
+    showFieldError("loginPassword", "Password is required");
+    hasError = true;
+}
+
+if (hasError) {
+    return;
+}
 
         const user = users.find(function (item) {
             return item.email === email;
         });
 
-        // მომხმარებელი ვერ მოიძებნა
-        if (!user) {
-            showFieldError("loginEmail", "Invalid email or password.");
-            return;
-        }
-
-        // პაროლი არ ემთხვევა
-        if (user.password !== password) {
-            showFieldError("loginPassword", "Invalid email or password.");
-            return;
-        }
-
+       
+        if (!user || user.password !== password) {
+    showFieldError("loginPassword", "Invalid email or password");
+    return;
+}
         localStorage.setItem("crm_session", JSON.stringify(user));
 
 showToast("Login successful!");

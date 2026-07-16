@@ -1,5 +1,5 @@
 
-const currentUser = JSON.parse(localStorage.getItem("crm_session"));
+/*const currentUser = JSON.parse(localStorage.getItem("crm_session"));
 
 console.log(currentUser);
 
@@ -12,7 +12,7 @@ const logoutBtn = document.getElementById("logoutBtn");
 logoutBtn.addEventListener("click", function () {
     localStorage.removeItem("crm_session");
     window.location.href = "index.html";
-});
+});*/
 
 const addClientBtn = document.getElementById("addClientBtn");
 

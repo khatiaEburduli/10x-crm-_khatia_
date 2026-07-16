@@ -1,9 +1,9 @@
-const currentUser = JSON.parse(localStorage.getItem("crm_session"));
+/*const currentUser = JSON.parse(localStorage.getItem("crm_session"));
 
 if (!currentUser) {
     window.location.href = "index.html";
-}
-
+}*/
+const currentUser = window.currentUser;
 document.getElementById("profileName").textContent = currentUser.fullName;
 
 document.getElementById("profileEmail").textContent = currentUser.email;
@@ -94,7 +94,7 @@ profileForm.addEventListener("submit", function (event) {
 
 
 
-const logoutBtn = document.getElementById("logoutBtn");
+/*const logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", function () {
 
@@ -102,7 +102,7 @@ logoutBtn.addEventListener("click", function () {
 
     window.location.href = "index.html";
 
-});
+});*/
 
 
 const passwordForm = document.getElementById("passwordForm");
