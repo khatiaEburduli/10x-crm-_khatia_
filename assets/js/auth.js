@@ -156,8 +156,24 @@ if (hasError) {
         if (!user || user.password !== password) {
     showFieldError("loginPassword", "Invalid email or password");
     return;
+
 }
-        localStorage.setItem("crm_session", JSON.stringify(user));
+const sessionUser = {
+
+    fullName: user.fullName,
+
+    email: user.email
+
+};
+
+localStorage.setItem(
+    "crm_session",
+    JSON.stringify(sessionUser)
+);
+
+
+
+       /* localStorage.setItem("crm_session", JSON.stringify(user));*/
 
 showToast("Login successful!");
 
