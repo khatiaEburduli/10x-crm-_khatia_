@@ -1,32 +1,74 @@
+# AI Usage Log
 
-# AI Log
+## Entry 1
 
-## Project: 10x CRM
+**Tool:** ChatGPT
 
-### AI Assistance Record
+**Purpose:**
+Implement user registration validation.
 
-**Date:** July 7, 2026
+**Prompt:**
+Help me implement Sign Up validation with required fields, email validation, password validation, and confirm password validation using Vanilla JavaScript.
 
-### Task:
-Setting up the initial structure of the 10x CRM project and preparing the GitHub repository.
+**Result:**
+Implemented complete Sign Up validation with field error messages and form validation.
 
-### AI Usage:
-I used AI assistance to help with:
-- Creating the initial project structure.
-- Understanding Git and GitHub workflow.
-- Setting up repository connection with remote origin.
-- Creating README.md
-- Planning the first steps of the CRM application development.
+---
 
-### Prompts / Questions:
-- How to create a proper README file?
-- What files are needed for a frontend CRM project?
-- How to organize the project structure?
+## Entry 2
 
-### Decisions Made:
-- The project will be built using HTML, CSS, and JavaScript.
-- The first version will focus on creating the user interface and basic CRM functionality.
-- GitHub will be used for version control and project tracking.
+**Tool:** ChatGPT
 
-### Outcome:
-The repository was successfully created and prepared for further development.
+**Purpose:**
+Implement Login authentication.
+
+**Prompt:**
+Help me create a Login system using LocalStorage and show an error message for invalid credentials.
+
+**Result:**
+Implemented Login functionality with session management and authentication validation.
+
+---
+
+## Entry 3
+
+**Tool:** ChatGPT
+
+**Purpose:**
+Implement Clients CRUD functionality.
+
+**Prompt:**
+Help me implement GET, POST, PUT, and DELETE operations using the DummyJSON API.
+
+**Result:**
+Integrated DummyJSON API and implemented client loading, adding, editing, and deleting.
+
+---
+
+## Entry 4
+
+**Tool:** ChatGPT
+
+**Purpose:**
+Implement Authentication Guard.
+
+**Prompt:**
+Help me create an authentication guard that redirects unauthorized users and implements Logout functionality.
+
+**Result:**
+Implemented route protection using crm_session and Logout functionality.
+
+---
+
+## Entry 5
+
+**Tool:** ChatGPT
+
+**Purpose:**
+Improve project quality and documentation.
+
+**Prompt:**
+Help me improve the README, LocalStorage structure, validation, and project organization.
+
+**Result:**
+Improved documentation, validation logic, LocalStorage usage, and overall project structure.
