@@ -1,0 +1,516 @@
+// =========================
+// DOM Elements
+// =========================
+
+const openBtn = document.getElementById("openClientModal");
+const closeBtn = document.getElementById("closeModal");
+const modal = document.getElementById("clientModal");
+const clientForm = document.getElementById("clientForm");
+const tableBody = document.getElementById("clientsTableBody");
+
+let editingClientId = null;
+
+
+// =========================
+// Load Clients
+// =========================
+
+async function loadClients() {
+
+    const savedClients = JSON.parse(localStorage.getItem("crm_clients"));
+
+    if (savedClients && savedClients.length > 0) {
+
+        renderClients(savedClients);
+
+        return;
+
+    }
+
+    await fetchClients();
+
+}
+
+
+// =========================
+// Fetch Clients From API
+// =========================
+
+async function fetchClients() {
+
+    tableBody.innerHTML =
+        `<tr><td colspan="4">Loading clients...</td></tr>`;
+
+    try {
+
+        const response = await fetch(
+            "https://dummyjson.com/users?limit=30"
+        );
+
+        if (!response.ok) {
+
+            throw new Error("Failed to load clients.");
+
+        }
+
+        const data = await response.json();
+
+        const clients = data.users.map(function (user) {
+
+            return {
+
+                id: user.id,
+
+                name: user.firstName + " " + user.lastName,
+
+                email: user.email,
+
+                company: user.company.name,
+
+                phone: user.phone,
+
+                image: user.image,
+
+                status: "Lead",
+
+                dealValue: 1000,
+
+                notes: [],
+
+                createdAt: new Date().toISOString()
+
+            };
+
+        });
+
+        localStorage.setItem(
+            "crm_clients",
+            JSON.stringify(clients)
+        );
+
+        renderClients(clients);
+
+    } catch (error) {
+
+        console.error(error);
+
+        tableBody.innerHTML =
+
+        `<tr>
+            <td colspan="4">
+                Could not load clients.
+            </td>
+        </tr>`;
+
+    }
+
+}
+// =========================
+// Modal
+// =========================
+
+openBtn.addEventListener("click", function () {
+
+    editingClientId = null;
+
+    clientForm.reset();
+
+    clearFieldError("clientName");
+    clearFieldError("clientEmail");
+    clearFieldError("clientCompany");
+
+    modal.classList.remove("hidden");
+
+});
+
+closeBtn.addEventListener("click", function () {
+
+    modal.classList.add("hidden");
+
+});
+
+
+// =========================
+// Add / Update Client
+// =========================
+
+clientForm.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const clientName = document
+        .getElementById("clientName")
+        .value
+        .trim();
+
+    const clientEmail = document
+        .getElementById("clientEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const clientCompany = document
+        .getElementById("clientCompany")
+        .value
+        .trim();
+
+
+    clearFieldError("clientName");
+    clearFieldError("clientEmail");
+    clearFieldError("clientCompany");
+
+
+    if (clientName.length < 3) {
+
+        showFieldError(
+            "clientName",
+            "Client name must contain at least 3 characters."
+        );
+
+        return;
+
+    }
+
+    if (clientEmail === "") {
+
+        showFieldError(
+            "clientEmail",
+            "Email is required."
+        );
+
+        return;
+
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(clientEmail)) {
+
+    showFieldError(
+        "clientEmail",
+        "Please enter a valid email."
+    );
+
+    return;
+
+}
+
+   /* if (!clientEmail.includes("@")) {
+
+        showFieldError(
+            "clientEmail",
+            "Please enter a valid email."
+        );
+
+        return;
+
+    }*/
+
+    if (clientCompany === "") {
+
+        showFieldError(
+            "clientCompany",
+            "Company is required."
+        );
+
+        return;
+
+    }
+
+
+    const clients =
+        JSON.parse(localStorage.getItem("crm_clients")) || [];
+
+
+    /*if (editingClientId === null) {
+
+        const client = {
+
+            id: Date.now(),
+
+            name: clientName,
+
+            email: clientEmail,
+
+            company: clientCompany,
+
+            phone: "",
+
+            image: "",
+
+            status: "Lead",
+
+            dealValue: 1000,
+
+            notes: [],
+
+            createdAt: new Date().toISOString()
+
+        };
+
+        clients.push(client);
+
+        showToast("Client added successfully!");
+
+    }*/
+   if (editingClientId === null) {
+
+    const newClient = {
+
+        firstName: clientName,
+
+        email: clientEmail,
+
+        company: {
+            name: clientCompany
+        }
+
+    };
+
+    try {
+
+        const response = await fetch(
+            "https://dummyjson.com/users/add",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify(newClient)
+
+            }
+        );
+        if (!response.ok) {
+
+    throw new Error("Could not add client.");
+
+}
+
+
+        const data = await response.json();
+
+        const client = {
+
+            id: data.id,
+
+            name: clientName,
+
+            email: clientEmail,
+
+            company: clientCompany,
+
+            phone: "",
+
+            image: "",
+
+            status: "Lead",
+
+            dealValue: 1000,
+
+            notes: [],
+
+            createdAt: new Date().toISOString()
+
+        };
+
+        clients.push(client);
+
+        localStorage.setItem(
+            "crm_clients",
+            JSON.stringify(clients)
+        );
+
+        showToast("Client added successfully!");
+
+    } catch (error) {
+
+        showToast("Could not add client.");
+
+        return;
+
+    }
+
+}
+    
+    else {
+
+        const client = clients.find(function (item) {
+
+            return item.id === editingClientId;
+
+        });
+
+        if (client) {
+
+            client.name = clientName;
+            client.email = clientEmail;
+            client.company = clientCompany;
+
+        }
+
+        editingClientId = null;
+
+        showToast("Client updated successfully!");
+
+    }
+
+
+    localStorage.setItem(
+        "crm_clients",
+        JSON.stringify(clients)
+    );
+
+    clientForm.reset();
+
+    modal.classList.add("hidden");
+
+    renderClients();
+
+});
+// =========================
+// Render Clients
+// =========================
+
+function renderClients(clients) {
+
+    if (!clients) {
+
+        clients =
+            JSON.parse(localStorage.getItem("crm_clients")) || [];
+
+    }
+
+    tableBody.innerHTML = "";
+
+    clients.forEach(function (client) {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${client.name}</td>
+            <td>${client.email}</td>
+            <td>${client.company}</td>
+            <td>
+                <button
+                    class="edit-btn"
+                    data-id="${client.id}">
+                    Edit
+                </button>
+
+                <button
+                    class="delete-btn"
+                    data-id="${client.id}">
+                    Delete
+                </button>
+            </td>
+        `;
+
+        tableBody.appendChild(row);
+
+    });
+
+}
+
+
+// =========================
+// Delete Client
+// =========================
+
+function deleteClient(clientId) {
+
+    let clients =
+        JSON.parse(localStorage.getItem("crm_clients")) || [];
+
+    clients = clients.filter(function (client) {
+
+        return client.id !== clientId;
+
+    });
+
+    localStorage.setItem(
+        "crm_clients",
+        JSON.stringify(clients)
+    );
+
+    showToast("Client deleted successfully!");
+
+    renderClients();
+
+}
+
+
+// =========================
+// Edit Client
+// =========================
+
+function editClient(clientId) {
+
+    const clients =
+        JSON.parse(localStorage.getItem("crm_clients")) || [];
+
+    const client = clients.find(function (item) {
+
+        return item.id === clientId;
+
+    });
+
+    if (!client) return;
+
+    document.getElementById("clientName").value = client.name;
+    document.getElementById("clientEmail").value = client.email;
+    document.getElementById("clientCompany").value = client.company;
+
+    editingClientId = client.id;
+
+    modal.classList.remove("hidden");
+
+}
+
+
+// =========================
+// Event Delegation
+// =========================
+
+document.addEventListener("click", function (event) {
+
+    if (event.target.classList.contains("delete-btn")) {
+
+        const clientId = Number(event.target.dataset.id);
+
+        const isConfirmed = confirm(
+            "Are you sure you want to delete this client?"
+        );
+
+        if (!isConfirmed) {
+
+            return;
+
+        }
+
+        deleteClient(clientId);
+
+    }
+
+    if (event.target.classList.contains("edit-btn")) {
+
+        const clientId = Number(event.target.dataset.id);
+
+        editClient(clientId);
+
+    }
+
+});
+
+
+// =========================
+// Start App
+// =========================
+
+loadClients();
+
+

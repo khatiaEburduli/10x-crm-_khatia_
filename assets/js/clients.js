@@ -1,18 +1,83 @@
-/*const currentUser = JSON.parse(localStorage.getItem("crm_session"));
 
-if (!currentUser) {
-    window.location.href = "index.html";
+ /*async function loadClients() {
+
+    const savedClients = JSON.parse(localStorage.getItem("crm_clients"));
+
+    if (savedClients && savedClients.length > 0) {
+        renderClients(savedClients);
+        return;
+    }
+
+    await fetchClients();
+
 }
 
-const logoutBtn = document.getElementById("logoutBtn");
 
-logoutBtn.addEventListener("click", function () {
 
-    localStorage.removeItem("crm_session");
 
-    window.location.href = "index.html";
+async function fetchClients() {
 
-}); */
+   
+
+
+
+    const tableBody = document.getElementById("clientsTableBody");
+
+    tableBody.innerHTML =
+        `<tr><td colspan="4">Loading clients...</td></tr>`;
+
+    try {
+
+        const response = await fetch(
+            "https://dummyjson.com/users?limit=30"
+        );
+
+        const data = await response.json();
+
+        const clients = data.users.map(function (user) {
+
+            return {
+
+                id: user.id,
+
+                name: user.firstName + " " + user.lastName,
+
+                email: user.email,
+
+                company: user.company.name,
+
+                phone: user.phone,
+
+                image: user.image,
+
+                status: "Lead",
+
+                dealValue: 1000,
+
+                notes: [],
+
+                createdAt: new Date().toISOString()
+
+            };
+
+        });
+
+        localStorage.setItem(
+            "crm_clients",
+            JSON.stringify(clients)
+        );
+
+        renderClients(clients);
+
+    } catch (error) {
+
+        tableBody.innerHTML =
+            `<tr><td colspan="4">Could not load clients.</td></tr>`;
+
+    }
+}
+
+
 const openBtn = document.getElementById("openClientModal");
 const closeBtn = document.getElementById("closeModal");
 const modal = document.getElementById("clientModal");
@@ -105,15 +170,18 @@ clientForm.addEventListener("submit", function (event) {
 
     clientForm.reset();
 
+
     modal.classList.add("hidden");
 
     renderClients();
 
 });
 
-function renderClients() {
+function renderClients(clients) {
 
-    const clients = JSON.parse(localStorage.getItem("crm_clients")) || [];
+    if (!clients) {
+        clients = JSON.parse(localStorage.getItem("crm_clients")) || [];
+    }
 
     const tableBody = document.getElementById("clientsTableBody");
 
@@ -144,7 +212,8 @@ function renderClients() {
 
 }
 
-renderClients();
+loadClients();
+
 
 document.addEventListener("click", function (event) {
 
@@ -206,4 +275,4 @@ function editClient(clientId) {
 
     modal.classList.remove("hidden");
 
-}
+}*/
