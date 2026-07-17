@@ -99,6 +99,11 @@ async function fetchClients() {
         `<tr>
             <td colspan="4">
                 Could not load clients.
+                Check your connection and try again.
+                <br><br>
+                <button id="retryBtn">
+                    Retry
+                </button>
             </td>
         </tr>`;
 
@@ -339,6 +344,48 @@ if (!emailRegex.test(clientEmail)) {
     
     else {
 
+         const updatedClient = {
+
+        firstName: clientName,
+
+        email: clientEmail,
+
+        company: {
+
+            name: clientCompany
+
+        }
+
+    };
+
+    try {
+
+        const response = await fetch(
+
+            `https://dummyjson.com/users/${editingClientId}`,
+
+            {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify(updatedClient)
+
+            }
+
+        );
+
+        if (!response.ok) {
+
+            throw new Error("Update failed");
+
+        }
+
         const client = clients.find(function (item) {
 
             return item.id === editingClientId;
@@ -353,10 +400,25 @@ if (!emailRegex.test(clientEmail)) {
 
         }
 
-        editingClientId = null;
+        localStorage.setItem(
+
+            "crm_clients",
+
+            JSON.stringify(clients)
+
+        );
 
         showToast("Client updated successfully!");
 
+        editingClientId = null;
+
+    } catch (error) {
+
+        showToast("Could not update client.");
+
+        return;
+
+    }
     }
 
 
@@ -421,9 +483,48 @@ function renderClients(clients) {
 // Delete Client
 // =========================
 
-function deleteClient(clientId) {
+async function deleteClient(clientId) {
 
-    let clients =
+      try {
+
+        const response = await fetch(
+            `https://dummyjson.com/users/${clientId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Delete failed.");
+        }
+
+        let clients =
+            JSON.parse(localStorage.getItem("crm_clients")) || [];
+
+        clients = clients.filter(function (client) {
+
+            return client.id !== clientId;
+
+        });
+
+        localStorage.setItem(
+            "crm_clients",
+            JSON.stringify(clients)
+        );
+
+        
+        renderClients();
+        showToast("Client deleted successfully!");
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast("Could not delete client.");
+
+    }
+
+    /*let clients =
         JSON.parse(localStorage.getItem("crm_clients")) || [];
 
     clients = clients.filter(function (client) {
@@ -439,7 +540,7 @@ function deleteClient(clientId) {
 
     showToast("Client deleted successfully!");
 
-    renderClients();
+    renderClients();*/
 
 }
 
@@ -476,7 +577,7 @@ function editClient(clientId) {
 // Event Delegation
 // =========================
 
-document.addEventListener("click", function (event) {
+document.addEventListener("click", async function (event) {
 
     if (event.target.classList.contains("delete-btn")) {
 
@@ -492,7 +593,7 @@ document.addEventListener("click", function (event) {
 
         }
 
-        deleteClient(clientId);
+       await deleteClient(clientId);
 
     }
 
