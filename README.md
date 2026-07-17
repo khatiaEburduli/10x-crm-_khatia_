@@ -148,7 +148,7 @@ https://10x-crm-khatia.vercel.app/
 
 ## Repository
 
-https://github.com/khatiaEburduli/10x-crm-_khatia_
+https://github.com/khatiaEburduli/10x-crm-_khatia_/tree/master
 
 ---
 
