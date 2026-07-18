@@ -100,3 +100,31 @@ body {
 .quick-actions button:hover {
     background: #1b2f73;
 }
+
+body.dark {
+    background: #1f2937;
+    color: white;
+}
+
+body.dark .header {
+    background: #111827;
+}
+
+body.dark .stat-card {
+    background: #374151;
+    color: white;
+}
+
+body.dark .quick-actions {
+    background: #374151;
+    color: white;
+}
+
+body.dark nav a {
+    color: white;
+}
+
+body.dark button {
+    background: #2563eb;
+    color: white;
+}

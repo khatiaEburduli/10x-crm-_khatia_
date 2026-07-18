@@ -1,74 +1,80 @@
 # AI Usage Log
 
-## Entry 1
+## Entry 1 – Signup Form Validation
 
-**Tool:** ChatGPT
-
-**Purpose:**
-Implement user registration validation.
+**Task:** Signup Form Validation
 
 **Prompt:**
-Help me implement Sign Up validation with required fields, email validation, password validation, and confirm password validation using Vanilla JavaScript.
+Help me implement signup form validation in JavaScript.
 
-**Result:**
-Implemented complete Sign Up validation with field error messages and form validation.
+**AI Response Summary:**
+The AI explained how to validate full name, email, password, and confirm password fields using JavaScript and how to display inline error messages.
+
+**What I Learned:**
+I learned how to validate user input, display error messages, and prevent form submission when validation fails.
 
 ---
 
-## Entry 2
+## Entry 2 – Toast Notifications
 
-**Tool:** ChatGPT
-
-**Purpose:**
-Implement Login authentication.
+**Task:** Toast Notifications
 
 **Prompt:**
-Help me create a Login system using LocalStorage and show an error message for invalid credentials.
+How can I replace alert() with toast notifications?
 
-**Result:**
-Implemented Login functionality with session management and authentication validation.
+**AI Response Summary:**
+The AI showed me how to create reusable toast notifications with HTML, CSS, and JavaScript for both success and error messages.
+
+**What I Learned:**
+I learned how to improve the user experience by replacing browser alerts with toast notifications.
 
 ---
 
-## Entry 3
+## Entry 3 – Authentication Guard
 
-**Tool:** ChatGPT
-
-**Purpose:**
-Implement Clients CRUD functionality.
+**Task:** Authentication Guard
 
 **Prompt:**
-Help me implement GET, POST, PUT, and DELETE operations using the DummyJSON API.
+How do I protect pages so only logged-in users can access them?
 
-**Result:**
-Integrated DummyJSON API and implemented client loading, adding, editing, and deleting.
+**AI Response Summary:**
+The AI explained how to use localStorage to store the current session and redirect unauthorized users to the login page.
+
+**What I Learned:**
+I learned how authentication guards work and how to protect private pages in a JavaScript application.
 
 ---
 
-## Entry 4
+## Entry 4 – Prompt Refinement
 
-**Tool:** ChatGPT
+**Task:** Prompt Improvement
 
-**Purpose:**
-Implement Authentication Guard.
+**Initial Prompt:**
+My validation doesn't work.
 
-**Prompt:**
-Help me create an authentication guard that redirects unauthorized users and implements Logout functionality.
+**Improved Prompt:**
+My signup validation does not display password errors correctly. Here is my auth.js code. Can you find the issue?
 
-**Result:**
-Implemented route protection using crm_session and Logout functionality.
+**AI Response Summary:**
+After I provided a more detailed prompt and shared my code, the AI found the exact problem and suggested the correct solution.
+
+**What I Learned:**
+I learned that clear and detailed prompts produce much more accurate and useful AI responses.
 
 ---
 
-## Entry 5
+## Entry 5 – Critical Evaluation
 
-**Tool:** ChatGPT
-
-**Purpose:**
-Improve project quality and documentation.
+**Task:** Project Review
 
 **Prompt:**
-Help me improve the README, LocalStorage structure, validation, and project organization.
+Review my CRM project according to the PRD requirements.
 
-**Result:**
-Improved documentation, validation logic, LocalStorage usage, and overall project structure.
+**AI Response Summary:**
+The AI reviewed my project and pointed out missing features such as Dark/Light Theme, additional Add Client fields, README improvements, and AI Log updates.
+
+**Critical Evaluation:**
+Some suggested validation messages did not exactly match the PRD, so I compared the AI suggestions with the project requirements before applying the changes.
+
+**What I Learned:**
+I learned that AI is a helpful assistant, but I should always verify its suggestions against the official project documentation before using them.

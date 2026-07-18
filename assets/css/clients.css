@@ -227,3 +227,62 @@ tbody tr:last-child {
 
     background: #b52a37;
 }
+/* ===== Dark Theme ===== */
+
+body.dark {
+    background: #1f2937;
+    color: white;
+}
+
+body.dark .header {
+    background: #111827;
+}
+
+body.dark .header a {
+    color: white;
+}
+
+body.dark .clients-page {
+    color: white;
+}
+
+body.dark .page-header h1 {
+    color: white;
+}
+
+body.dark table {
+    background: #374151;
+    color: white;
+}
+
+body.dark thead {
+    background: #111827;
+}
+
+body.dark tbody tr {
+    border-bottom: 1px solid #555;
+}
+
+body.dark .modal-content {
+    background: #374151;
+    color: white;
+}
+
+body.dark .modal-content h2 {
+    color: white;
+}
+
+body.dark input {
+    background: #4b5563;
+    color: white;
+    border: 1px solid #6b7280;
+}
+
+body.dark input::placeholder {
+    color: #d1d5db;
+}
+
+body.dark .modal-actions button[type="button"] {
+    background: #6b7280;
+    color: white;
+}

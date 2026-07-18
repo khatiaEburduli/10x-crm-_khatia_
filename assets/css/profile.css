@@ -235,3 +235,59 @@ body {
 #resetDataBtn:hover {
     background: #b71c1c;
 }
+
+/* ===== Dark Theme ===== */
+
+body.dark {
+    background: #1f2937;
+    color: white;
+}
+
+body.dark .header {
+    background: #111827;
+}
+
+body.dark .header a {
+    color: white;
+}
+
+body.dark .profile-card,
+body.dark .profile-form,
+body.dark .password-form,
+body.dark .danger-zone {
+    background: #374151;
+    color: white;
+}
+
+body.dark .profile-card h2,
+body.dark .profile-form h2,
+body.dark .password-form h2 {
+    color: white;
+}
+
+body.dark .profile-card p,
+body.dark .danger-zone p {
+    color: #d1d5db;
+}
+
+body.dark input {
+    background: #4b5563;
+    color: white;
+    border: 1px solid #6b7280;
+}
+
+body.dark input::placeholder {
+    color: #d1d5db;
+}
+
+body.dark .avatar {
+    background: #2563eb;
+}
+
+body.dark #resetDataBtn {
+    background: #dc2626;
+}
+
+body.dark #resetDataBtn:hover {
+    background: #b91c1c;
+}

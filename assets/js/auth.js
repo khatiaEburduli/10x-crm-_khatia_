@@ -40,14 +40,14 @@ if (signupForm) {
 
         // Email Validation
         if (email === "") {
-            showFieldError("email", "Email is required.");
+            showFieldError("email", "Email is required");
             hasError = true;
         }
 
         if (!emailPattern.test(email)) {
     showFieldError(
         "email",
-        "Please enter a valid email address."
+        "Please enter a valid email address"
     );
 
     hasError = true;
@@ -55,20 +55,20 @@ if (signupForm) {
 
         // Password Validation
         if (password.length < 8) {
-            showFieldError("password", "Password must be at least 8 characters.");
+            showFieldError("password", "Password must be at least 8 characters");
             hasError = true;
         }
         if (!/^(?=.*[A-Za-z])(?=.*\d).+$/.test(password)) {
     showFieldError(
         "password",
-        "Password must be at least 8 characters and contain a letter and a number."
+        "Password must be at least 8 characters and contain a letter and a number"
     );
-    hasError = true;
+    hasError = true;  
 }
 
         // Confirm Password Validation
         if (password !== confirmPassword) {
-            showFieldError("confirmPassword", "Passwords do not match.");
+            showFieldError("confirmPassword", "Passwords do not match");
             hasError = true;
         }
 
@@ -103,17 +103,13 @@ if (hasError) {
 
         localStorage.setItem("crm_users", JSON.stringify(users));
 
-        showToast("Registration Successful!");
+        showToast("Account created successfully! Please log in");
 
         setTimeout(function () {
             window.location.href = "index.html";
-        }, 2000);
+        }, 1500);
 
-        console.log(fullName);
-        console.log(email);
-        console.log(company);
-        console.log(password);
-        console.log(confirmPassword);
+       
     });
 
 }
@@ -179,7 +175,7 @@ showToast("Login successful!");
 
 setTimeout(function () {
     window.location.href = "dashboard.html";
-}, 2000);
+}, 1500);
 
         console.log("Login Successful!");
 

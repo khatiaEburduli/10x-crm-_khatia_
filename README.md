@@ -152,6 +152,17 @@ https://github.com/khatiaEburduli/10x-crm-_khatia_/tree/master
 
 ---
 
-## Author
+## Test Account
 
-**Khatia Burduli**
+Email:
+burdulikat@gmail.com
+
+Password:
+mandarini11
+
+
+## Credits
+
+Developed by Khatia Burduli.
+
+AI assistance: ChatGPT (used for explanations and debugging).
