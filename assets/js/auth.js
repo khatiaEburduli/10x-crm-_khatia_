@@ -120,6 +120,7 @@ if (loginForm) {
 
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
+    
 
         const email = document.getElementById("loginEmail").value.trim().toLowerCase();
         const password = document.getElementById("loginPassword").value;
@@ -169,16 +170,13 @@ localStorage.setItem(
 
 
 
-       /* localStorage.setItem("crm_session", JSON.stringify(user));*/
-
 showToast("Login successful!");
 
-setTimeout(function () {
+
     window.location.href = "dashboard.html";
-}, 1500);
 
-        console.log("Login Successful!");
 
+        
     });
 
 }

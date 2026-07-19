@@ -74,9 +74,9 @@ async function fetchClients() {
 
                 image: user.image,
 
-                status: clientStatus,
+                status: "Lead",
 
-                dealValue: Number(clientDealValue),
+                dealValue: 1000,
 
                 notes: [],
 
