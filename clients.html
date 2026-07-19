@@ -44,6 +44,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Company</th>
+                <th>Phone</th>
+                <th>Deal Value</th>
+                <th>Status</th>
                 <th>Actions</th>
 
             </tr>
@@ -81,6 +84,31 @@
             >
 
             <small id="clientEmailError" class="error-message"></small>
+
+<input
+    type="text"
+    id="clientPhone"
+    placeholder="Phone"
+>
+
+<small id="clientPhoneError" class="error-message"></small>
+
+<input
+    type="number"
+    id="clientDealValue"
+    placeholder="Deal Value"
+>
+
+<small id="clientDealValueError" class="error-message"></small>
+
+<select id="clientStatus">
+    <option value="Lead">Lead</option>
+    <option value="Qualified">Qualified</option>
+    <option value="Proposal">Proposal</option>
+    <option value="Won">Won</option>
+    <option value="Lost">Lost</option>
+</select>
+
 
             <input
                 type="text"

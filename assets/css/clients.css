@@ -136,13 +136,22 @@ tbody tr:last-child {
     color: #233b8b;
 }
 
-.modal-content input {
+.modal-content input, 
+.modal-content select {
+
     width: 100%;
     padding: 12px;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
+    
+}
+body.dark .modal-content input,
+body.dark .modal-content select {
+    background: #2d3748;
+    color: white;
+    border: 1px solid #555;
 }
 
 .modal-actions {

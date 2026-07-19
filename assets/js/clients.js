@@ -8,7 +8,10 @@ const modal = document.getElementById("clientModal");
 const clientForm = document.getElementById("clientForm");
 const tableBody = document.getElementById("clientsTableBody");
 
+
+
 let editingClientId = null;
+
 
 
 // =========================
@@ -71,9 +74,9 @@ async function fetchClients() {
 
                 image: user.image,
 
-                status: "Lead",
+                status: clientStatus,
 
-                dealValue: 1000,
+                dealValue: Number(clientDealValue),
 
                 notes: [],
 
@@ -120,8 +123,12 @@ openBtn.addEventListener("click", function () {
 
     clientForm.reset();
 
+    document.getElementById("clientStatus").value = "Lead";
+
     clearFieldError("clientName");
     clearFieldError("clientEmail");
+    clearFieldError("clientPhone");
+    clearFieldError("clientDealValue");
     clearFieldError("clientCompany");
 
     modal.classList.remove("hidden");
@@ -160,6 +167,16 @@ clientForm.addEventListener("submit", async function (event) {
         .trim();
 
 
+        const clientPhone =
+    document.getElementById("clientPhone").value.trim();
+
+const clientDealValue =
+    document.getElementById("clientDealValue").value.trim();
+
+const clientStatus =
+    document.getElementById("clientStatus").value;
+
+
     clearFieldError("clientName");
     clearFieldError("clientEmail");
     clearFieldError("clientCompany");
@@ -193,7 +210,7 @@ if (!emailRegex.test(clientEmail)) {
 
     showFieldError(
         "clientEmail",
-        "Please enter a valid email."
+        "Please enter a valid email address"
     );
 
     return;
@@ -211,7 +228,7 @@ if (!emailRegex.test(clientEmail)) {
 
     }*/
 
-    if (clientCompany === "") {
+   /* if (clientCompany === "") {
 
         showFieldError(
             "clientCompany",
@@ -220,44 +237,33 @@ if (!emailRegex.test(clientEmail)) {
 
         return;
 
-    }
+    }*/
+
 
 
     const clients =
         JSON.parse(localStorage.getItem("crm_clients")) || [];
 
+         if (editingClientId === null) {
 
-    /*if (editingClientId === null) {
+    const existingClient = clients.find(function (client) {
+        return client.email === clientEmail;
+    });
 
-        const client = {
+    if (existingClient) {
 
-            id: Date.now(),
+        showFieldError(
+            "clientEmail",
+            "A client with this email already exists"
+        );
 
-            name: clientName,
+        return;
+    }
 
-            email: clientEmail,
+}
 
-            company: clientCompany,
 
-            phone: "",
 
-            image: "",
-
-            status: "Lead",
-
-            dealValue: 1000,
-
-            notes: [],
-
-            createdAt: new Date().toISOString()
-
-        };
-
-        clients.push(client);
-
-        showToast("Client added successfully!");
-
-    }*/
    if (editingClientId === null) {
 
     const newClient = {
@@ -309,7 +315,7 @@ if (!emailRegex.test(clientEmail)) {
 
             company: clientCompany,
 
-            phone: "",
+            phone: clientPhone,
 
             image: "",
 
@@ -397,6 +403,9 @@ if (!emailRegex.test(clientEmail)) {
             client.name = clientName;
             client.email = clientEmail;
             client.company = clientCompany;
+            client.phone = clientPhone;
+            client.dealValue = Number(clientDealValue);
+            client.status = clientStatus;
 
         }
 
@@ -428,10 +437,15 @@ if (!emailRegex.test(clientEmail)) {
     );
 
     clientForm.reset();
+    editingClientId = null;
+
+document.getElementById("clientStatus").value = "Lead";
 
     modal.classList.add("hidden");
 
     renderClients();
+
+   
 
 });
 // =========================
@@ -457,6 +471,10 @@ function renderClients(clients) {
             <td>${client.name}</td>
             <td>${client.email}</td>
             <td>${client.company}</td>
+            <td>${client.phone}</td>
+            <td>${client.dealValue}</td>
+             <td>${client.status}</td>
+
             <td>
                 <button
                     class="edit-btn"
@@ -565,6 +583,9 @@ function editClient(clientId) {
     document.getElementById("clientName").value = client.name;
     document.getElementById("clientEmail").value = client.email;
     document.getElementById("clientCompany").value = client.company;
+    document.getElementById("clientPhone").value = client.phone || "";
+document.getElementById("clientDealValue").value = client.dealValue || "";
+document.getElementById("clientStatus").value = client.status || "Lead";
 
     editingClientId = client.id;
 

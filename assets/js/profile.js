@@ -1,5 +1,4 @@
 
-const currentUser = window.currentUser;
 document.getElementById("profileName").textContent = currentUser.fullName;
 
 document.getElementById("profileEmail").textContent = currentUser.email;
