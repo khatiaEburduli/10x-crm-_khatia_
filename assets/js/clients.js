@@ -468,11 +468,17 @@ function renderClients(clients) {
         const row = document.createElement("tr");
 
         row.innerHTML = `
-            <td>${client.name}</td>
+            <td>
+            <img
+            src="${client.image}"
+            alt="${client.name}"
+            class="client-avatar">
+            ${client.name}
+            </td>
             <td>${client.email}</td>
             <td>${client.company}</td>
             <td>${client.phone}</td>
-            <td>${client.dealValue}</td>
+            <td>$${client.dealValue.toLocaleString()}</td>
              <td>${client.status}</td>
 
             <td>

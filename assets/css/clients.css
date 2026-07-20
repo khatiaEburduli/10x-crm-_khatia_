@@ -295,3 +295,13 @@ body.dark .modal-actions button[type="button"] {
     background: #6b7280;
     color: white;
 }
+
+
+.client-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+    vertical-align: middle;
+}
