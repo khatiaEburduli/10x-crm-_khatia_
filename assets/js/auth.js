@@ -1,5 +1,8 @@
+// Check if a user session already exists
 const currentUser = JSON.parse(localStorage.getItem("crm_session"));
 
+// If the user is already logged in and is on the login or signup page,
+// redirect them straight to the dashboard
 if (
     currentUser &&
     (
@@ -10,18 +13,23 @@ if (
     window.location.href = "dashboard.html";
 }
 
+// Get reference to the signup form
 const signupForm = document.getElementById("signupForm");
 
+// Only attach the submit handler if the signup form exists on this page
 if (signupForm) {
 
     signupForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        // Grab and sanitize form field values
         const fullName = document.getElementById("fullName").value.trim();
         const email = document.getElementById("email").value.trim().toLowerCase();
         const company = document.getElementById("company").value.trim();
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
+
+        // Regex pattern used to validate basic email format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Clear previous errors

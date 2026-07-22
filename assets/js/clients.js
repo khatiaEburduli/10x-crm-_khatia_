@@ -217,30 +217,7 @@ if (!emailRegex.test(clientEmail)) {
 
 }
 
-   /* if (!clientEmail.includes("@")) {
-
-        showFieldError(
-            "clientEmail",
-            "Please enter a valid email."
-        );
-
-        return;
-
-    }*/
-
-   /* if (clientCompany === "") {
-
-        showFieldError(
-            "clientCompany",
-            "Company is required."
-        );
-
-        return;
-
-    }*/
-
-
-
+ 
     const clients =
         JSON.parse(localStorage.getItem("crm_clients")) || [];
 
@@ -548,23 +525,7 @@ async function deleteClient(clientId) {
 
     }
 
-    /*let clients =
-        JSON.parse(localStorage.getItem("crm_clients")) || [];
-
-    clients = clients.filter(function (client) {
-
-        return client.id !== clientId;
-
-    });
-
-    localStorage.setItem(
-        "crm_clients",
-        JSON.stringify(clients)
-    );
-
-    showToast("Client deleted successfully!");
-
-    renderClients();*/
+    
 
 }
 
