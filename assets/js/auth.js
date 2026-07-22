@@ -167,8 +167,15 @@ const sessionUser = {
 
     fullName: user.fullName,
 
-    email: user.email
+    email: user.email,
+    
+     
+    company: user.company,
 
+    createdAt: user.createdAt,
+
+    password: user.password
+     
 };
 
 localStorage.setItem(
