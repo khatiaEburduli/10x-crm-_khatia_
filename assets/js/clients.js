@@ -495,9 +495,9 @@ async function deleteClient(clientId) {
             }
         );
 
-        if (!response.ok) {
-            throw new Error("Delete failed.");
-        }
+        if (!response.ok && response.status !== 404) {
+    throw new Error("Delete failed.");
+}
 
         let clients =
             JSON.parse(localStorage.getItem("crm_clients")) || [];
