@@ -80,7 +80,9 @@ if (signupForm) {
             hasError = true;
         }
 
+         // Create a new user object from the signup form data
         const user = {
+            // Generate a unique ID based on the current timestamp
             id: Date.now(),
             fullName: fullName,
             email: email,
@@ -89,12 +91,16 @@ if (signupForm) {
             createdAt: new Date().toISOString()
         };
 
+        // Get all registered users from localStorage
+        // If no users exist yet, use an empty array
         const users = JSON.parse(localStorage.getItem("crm_users")) || [];
 
+        // Check if an account with the same email already exists
         const existingUser = users.find(function (item) {
     return item.email === email;
 });
 
+// If the email is already registered, show an error
 if (existingUser) {
     showFieldError(
         "email",
@@ -103,16 +109,20 @@ if (existingUser) {
     hasError = true;
 }
 
+// Stop the signup process if there are validation errors
 if (hasError) {
     return;
 }
 
+        // Add the new user to the users array
         users.push(user);
 
+        // Save the updated users array back to localStorage
         localStorage.setItem("crm_users", JSON.stringify(users));
 
         showToast("Account created successfully! Please log in");
 
+        // Redirect the user to the login page after 1.5 seconds
         setTimeout(function () {
             window.location.href = "index.html";
         }, 1500);
@@ -122,47 +132,58 @@ if (hasError) {
 
 }
 
+// Get the login form element
 const loginForm = document.getElementById("loginForm");
 
+// Run the login logic only if the form exists
 if (loginForm) {
 
+
+      // Listen for the login form submission
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
     
 
+        // Get the entered email, remove extra spaces,
+        // and convert it to lowercase
         const email = document.getElementById("loginEmail").value.trim().toLowerCase();
         const password = document.getElementById("loginPassword").value;
 
+           // Clear any previous validation errors
         clearFieldError("loginEmail");
         clearFieldError("loginPassword");
 
+         // Load registered users from localStorage
+        // Use an empty array if there are no users
         const users = JSON.parse(localStorage.getItem("crm_users")) || [];
         let hasError = false;
-
+// Check if the email field is empty
 if (email === "") {
     showFieldError("loginEmail", "Email is required");
     hasError = true;
 }
-
+// Check if the password field is empty
 if (password === "") {
     showFieldError("loginPassword", "Password is required");
     hasError = true;
 }
-
+// Stop the login process if validation fails
 if (hasError) {
     return;
 }
 
+        // Find a user with the entered email
         const user = users.find(function (item) {
             return item.email === email;
         });
 
-       
+       // Check if the user exists and the password matches
         if (!user || user.password !== password) {
     showFieldError("loginPassword", "Invalid email or password");
     return;
 
 }
+// Create a session object for the logged-in user
 const sessionUser = {
 
     fullName: user.fullName,
@@ -177,17 +198,17 @@ const sessionUser = {
     password: user.password
      
 };
-
+// Save the logged-in user's session in localStorage
 localStorage.setItem(
     "crm_session",
     JSON.stringify(sessionUser)
 );
 
 
-
+// Show a successful login message
 showToast("Login successful!");
 
-
+    // Redirect the user to the dashboard page
     window.location.href = "dashboard.html";
 
 
